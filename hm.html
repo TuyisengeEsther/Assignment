@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Esther Tuyisenge | Portfolio</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: 050B1F;
+      color:white;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header + navigation */
+    .site-header {
+      padding: 28px 0 20px;
+      border-bottom: 1px solid #e9edf2;
+      background: 050B1F;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #1f3b4c, #2c5a6e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c4b5e;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #1f6e8c;
+      border-bottom: 2px solid #1f6e8c;
+      padding-bottom: 4px;
+    }
+
+    /* sections general */
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: -0.3px;
+      color: #183c4a;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #2c8eaa;
+      border-radius: 4px;
+    }
+
+   
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-badge {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2c8eaa;
+      margin-bottom: 1rem;
+    }
+    .hero-content h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #0f2d3a;
+    }
+    .hero-content .highlight {
+      color: #226f8a;
+      border-bottom: 2px solid #b9dfed;
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #2f4f62;
+      margin: 1.5rem 0 2rem;
+      max-width: 550px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: #1f6e8c;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .btn-primary:hover {
+      background: #0e5a75;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      border: 1.5px solid #1f6e8c;
+      background: transparent;
+      color: #1f6e8c;
+    }
+    .btn-outline:hover {
+      background: #e2f0f5;
+    }
+    .hero-avatar {
+      flex: 0.8;
+      min-width: 200px;
+      text-align: center;
+    }
+    .avatar-placeholder {
+      background: linear-gradient(145deg, #c9e3ed, #b0d0de);
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      font-weight: 500;
+      color: #2c5a6e;
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.2);
+      border: 4px solid white;
+    }
+
+   
+    .filter-bar {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #cbdde6;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+      color: #2c5a6e;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: #1f6e8c;
+      border-color: #1f6e8c;
+      color: white;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .project-card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid #eef2f5;
+      transition: 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 30px -12px rgba(0,0,0,0.1);
+      border-color: #cddfe8;
+    }
+    .project-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .project-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      color: #1e4b60;
+    }
+    .project-card p {
+      color: #4d6a7c;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .project-tag {
+      display: inline-block;
+      background: #e6f2f7;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #226f8a;
+    }
+
+    /* resume layout */
+    .resume-container {
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f8;
+    }
+    .resume-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .resume-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .resume-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 12px;
+      color: #2f6479;
+      font-size: 0.9rem;
+    }
+    .resume-contact-row a {
+      color: #226f8a;
+      text-decoration: none;
+    }
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .resume-section {
+      margin-bottom: 24px;
+    }
+    .resume-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      border-left: 4px solid #2c8eaa;
+      padding-left: 16px;
+    }
+    .edu-item, .project-item, .skill-item {
+      margin-bottom: 16px;
+    }
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .skill-badge {
+      background: #eef3f8;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .cert-item, .lang-item {
+      margin-bottom: 10px;
+    }
+    hr {
+      margin: 20px 0;
+      border-color: #e9edf2;
+    }
+    /* contact form section */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+    }
+    .contact-info {
+      flex: 1;
+      background: #f8fafc;
+      padding: 28px;
+      border-radius: 28px;
+    }
+    .contact-detail {
+      margin: 24px 0;
+    }
+    .contact-detail p {
+      margin: 8px 0;
+    }
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .social-icons a {
+      text-decoration: none;
+      background: white;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1f6e8c;
+      border: 1px solid #d0e2ec;
+    }
+    .contact-form {
+      flex: 1.2;
+      background: white;
+      padding: 28px;
+      border-radius: 28px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f6;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      border: 1px solid #cfdfe8;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      background: #fff;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #1f6e8c;
+      box-shadow: 0 0 0 3px rgba(31,110,140,0.1);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button[type="submit"] {
+      background: #1f6e8c;
+      color: white;
+      border: none;
+      width: auto;
+      padding: 12px 32px;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 32px 0 40px;
+      font-size: 0.85rem;
+      color: #5e7f92;
+      background: white;
+    }
+    @media (max-width: 780px) {
+      .resume-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .btn-group {
+        justify-content: center;
+      }
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .section-title:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+      .contact-wrapper {
+        flex-direction: column;
+      }
+      .nav-wrapper {
+        flex-direction: column;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrapper">
+    <div class="logo">
+      <h1>Esther.</h1>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#about" class="nav-link">About Me</a></li>
+      <li><a href="#projects" class="nav-link">Project</a></li>
+      <li><a href="#resume" class="nav-link">Resume</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+ 
+  <section id="home">
+    <div class="container hero">
+      <div class="hero-content">
+        <div class="hero-badge">✦ Welcome</div>
+        <h2>Hi, I'm <span class="highlight">Tuyisenge Esther</span><br>Software Engineering Student & Aspiring Web Developer</h2>
+        <p class="hero-desc">As a Software Engineering student, I am passionate about web development, solving technical problems, and creating user-friendly digital experiences. I strive to build innovative solutions that improve everyday life.</p>
+        <div class="btn-group">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <div class="avatar-placeholder">✨<br>ESTHER</div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">My Work</h2>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Dev</button>
+        <button class="filter-btn" data-filter="ux">UX/UI</button>
+        <button class="filter-btn" data-filter="other">Other</button>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- project items matching info from resume & desc -->
+        <div class="project-card" data-category="web">
+          <div class="project-icon">🌐</div>
+          <h3>Online Job Portal</h3>
+          <p>Full-stack web app for job listings & applications (React, Node.js, MongoDB) – connecting employers & job seekers.</p>
+          <span class="project-tag">Web Dev</span>
+        </div>
+        <div class="project-card" data-category="web">
+          <div class="project-icon">🏛️</div>
+          <h3>University Group Request System</h3>
+          <p>Platform for student collaboration & group project management with real-time requests and approval flow.</p>
+          <span class="project-tag">Web Dev</span>
+        </div>
+        <div class="project-card" data-category="ux">
+          <div class="project-icon">🎨</div>
+          <h3>Virtual Art Gallery</h3>
+          <p>Interactive 3D-inspired gallery showcasing digital art with immersive UI/UX design & smooth navigation.</p>
+          <span class="project-tag">UX/UI</span>
+        </div>
+        <div class="project-card" data-category="other">
+          <div class="project-icon">📱</div>
+          <h3>Mobile Task Manager (Android)</h3>
+          <p>Android Studio based productivity app with local database & clean material design – academic project.</p>
+          <span class="project-tag">Other</span>
+        </div>
+        <div class="project-card" data-category="web">
+          <div class="project-icon">💻</div>
+          <h3>Portfolio 2026</h3>
+          <p>Personal portfolio website using responsive layouts, modern HTML/CSS & interactive components.</p>
+          <span class="project-tag">Web Dev</span>
+        </div>
+        <div class="project-card" data-category="ux">
+          <div class="project-icon">✏️</div>
+          <h3>Fintech Dashboard Redesign</h3>
+          <p>UX research & redesign for a banking dashboard (Figma, user flows, high-fidelity prototypes).</p>
+          <span class="project-tag">UX/UI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="resume">
+    <div class="container">
+      <h2 class="section-title">Resume</h2>
+      <div class="resume-container">
+        <div class="resume-header">
+          <h2>Tuyisenge Esther</h2>
+          <p>Software Engineering Graduate · AUCA, Rwanda</p>
+          <div class="resume-contact-row">
+            <span>📧 tuyisester2020@gmail.com</span>
+            <span>📞 +250 780 524 528</span>
+            <span>🐙 github.com/TuyisengeEsther</span>
+            <span>🦊 gitlab.com/T-esther</span>
+          </div>
+        </div>
+        <p style="text-align: center; margin-bottom: 24px; background:#eef6fa; padding:12px; border-radius: 40px;">Final-year Software Engineering student with a solid foundation in full-stack web development (React, Node.js) and mobile development (Android Studio). Completed multidisciplinary academic projects applying frontend, backend and database concepts. Motivated to gain hands-on IT experience.</p>
+        
+        <div class="resume-grid">
+          <div>
+            <div class="resume-section">
+              <h3>🎓 Education</h3>
+              <div class="edu-item">
+                <strong>Bachelor of Science in Software Engineering</strong> (Expected 2026 - Awaiting Defense)<br>
+                Adventist University of Central Africa (AUCA) · Rwanda<br>
+                <span style="font-size:0.85rem;">Full-stack web development, mobile development, databases and software engineering principles</span>
+              </div>
+            </div>
+            <div class="resume-section">
+              <h3>📌 Academic Projects</h3>
+              <div class="project-item">✓ Online Job Portal</div>
+              <div class="project-item">✓ University Group Request System</div>
+              <div class="project-item">✓ Virtual Art Gallery</div>
+            </div>
+            <div class="resume-section">
+              <h3>📜 Certificates</h3>
+              <div class="cert-item">Intersociety Networking</div>
+              <div class="cert-item">Network Operating 1 & 2</div>
+              <div class="cert-item">FreeCodeCamp – Spring Boot</div>
+            </div>
+          </div>
+          <div>
+            <div class="resume-section">
+              <h3>⚙️ Technical Skills</h3>
+              <div class="skill-items">
+                <span class="skill-badge">C</span><span class="skill-badge">Java</span><span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">React</span><span class="skill-badge">Node.js</span><span class="skill-badge">Android Studio</span>
+                <span class="skill-badge">Spring Boot</span><span class="skill-badge">Git</span>
+              </div>
+            </div>
+            <div class="resume-section">
+              <h3>🌍 Languages</h3>
+              <div class="lang-item">Kinyarwanda (Native)</div>
+              <div class="lang-item">English (Fluent)</div>
+              <div class="lang-item">Deutsch (Basic)</div>
+            </div>
+            <hr>
+            <div class="resume-section">
+              <h3>📎 extra info</h3>
+              <p>Available for internships & junior developer roles | Problem-solver, fast learner, passionate about tech for social good.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT section exactly as design: Get in touch, info, form -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p style="margin-bottom: 2rem;">Have a project in mind or want to work together? Send me a message!</p>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3 style="margin-bottom: 16px;">📌 Contact Info</h3>
+          <div class="contact-detail">
+            <p><strong>Email:</strong> tuyisengeesther65@gmail.com</p>
+            <p><strong>Location:</strong> Kigali, Rwanda</p>
+            <p><strong>Availability:</strong> Open For Opportunities</p>
+          </div>
+          <h4>Find Me On</h4>
+          <div class="social-icons">
+            <a href="#">GitHub</a>
+            <a href="#">GitLab</a>
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3 style="margin-bottom: 24px;">✨ Send Your Message Here!</h3>
+          <form id="messageForm" action="#" method="post">
+            <div class="form-group">
+              <input type="text" placeholder="eg. Tuyisenge Esther" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="eg. example@gmail.com" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="eg. Job Collaboration" name="subject" id="subject" required>
+            </div>
+            <div class="form-group">
+              <textarea placeholder="Write Your Message Here..." name="message" id="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message ✨</button>
+            <p id="formFeedback" style="margin-top: 16px; font-size:0.85rem;"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    Designed and built by Tuyisenge Esther · 2026 <br>
+    Software Engineering Student - Kigali, Rwanda
+  </div>
+</footer>
+
+<script>
+  
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  function setActiveLink() {
+    let current = '';
+    const scrollPos = window.scrollY + 120;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href').substring(1);
+      if (href === current) {
+        link.classList.add('active');
+      }
+    });
+    if (!current && window.scrollY < 100) {
+      document.querySelector('.nav-link[href="#home"]').classList.add('active');
+    }
+  }
+  
+  window.addEventListener('scroll', setActiveLink);
+  window.addEventListener('load', setActiveLink);
+  
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, null, `#${targetId}`);
+      }
+    });
+  });
+  
+  // Filter logic for projects
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projects = document.querySelectorAll('.project-card');
+  
+  function filterProjects(category) {
+    projects.forEach(project => {
+      const projectCat = project.getAttribute('data-category');
+      if (category === 'all' || projectCat === category) {
+        project.style.display = 'block';
+      } else {
+        project.style.display = 'none';
+      }
+    });
+  }
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filterVal = btn.getAttribute('data-filter');
+      filterProjects(filterVal);
+    });
+  });
+  
+ 
+  const contactForm = document.getElementById('messageForm');
+  const feedback = document.getElementById('formFeedback');
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    if (name && email && subject && msg) {
+      feedback.innerHTML = '✅ Thank you, ' + name + '! Your message has been sent. I\'ll get back to you soon.';
+      feedback.style.color = '#1f6e8c';
+      contactForm.reset();
+      setTimeout(() => { feedback.innerHTML = ''; }, 5000);
+    } else {
+      feedback.innerHTML = '❌ Please fill out all fields before sending.';
+      feedback.style.color = '#c05a5a';
+    }
+  });
+  
+  
+  filterProjects('all');
+  
+ 
+  if (window.location.hash) {
+    const el = document.querySelector(window.location.hash);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+  }
+</script>
+</body>
+</html>
