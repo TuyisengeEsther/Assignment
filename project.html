@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Esther — Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0e1a;
+      --bg2: #12142a;
+      --nav-bg: #0a0b17;
+      --accent: #7c6af7;
+      --accent2: #a78bfa;
+      --text: #c8cae8;
+      --text-dim: #555878;
+      --card-bg: #141630;
+      --card-border: #1e2145;
+      --white: #eeeeff;
+      --red-dot: #e74c3c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--nav-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #1a1c33;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent2); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      transition: color .2s;
+      letter-spacing: .3px;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--accent2); }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .filters {
+      display: flex;
+      gap: .65rem;
+      margin-bottom: 2.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem;
+      padding: .38rem 1.1rem;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all .22s;
+    }
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── GRID ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.4rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(124,106,247,.18);
+      border-color: var(--accent);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.85);
+      transition: filter .3s;
+    }
+    .card:hover .card-img { filter: brightness(.45); }
+
+    /* overlay text */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.4rem;
+      opacity: 0;
+      transition: opacity .3s ease;
+      text-align: center;
+      background: linear-gradient(160deg, rgba(124,106,247,.25), rgba(13,14,26,.7));
+    }
+    .card:hover .card-overlay { opacity: 1; }
+
+    .card-overlay h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .card-overlay p {
+      font-size: .8rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.55;
+    }
+    .card-overlay .tag {
+      display: inline-block;
+      margin-top: .8rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .25rem .7rem;
+      border-radius: 99px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,5,18,.82);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: #14163a;
+      border: 1px solid #2a2e60;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem;
+      transform: translateY(30px) scale(.97);
+      transition: transform .3s;
+      position: relative;
+    }
+    .modal-backdrop.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .modal h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .6rem;
+    }
+
+    .modal p {
+      font-size: .88rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .modal .meta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .modal .meta span {
+      background: rgba(124,106,247,.15);
+      border: 1px solid rgba(124,106,247,.3);
+      color: var(--accent2);
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .22rem .65rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(255,255,255,.07);
+      border: none;
+      color: var(--text);
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,.15); }
+
+    .btn-view {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .55rem 1.4rem;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-view:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    /* red indicator dot */
+    .dot {
+      width: 8px; height: 8px;
+      background: var(--red-dot);
+      border-radius: 50%;
+      margin-bottom: 1.6rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Est<span>her.</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Me</a></li>
+      <li><a href="#" class="active">Project</a></li>
+      <li><a href="#">Resume</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>My Work</h1>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="webdev">Web Dev</button>
+      <button class="filter-btn" data-filter="uxui">UX/UI</button>
+      <button class="filter-btn" data-filter="other">Other</button>
+    </div>
+
+    <div class="dot"></div>
+
+    <div class="projects-grid" id="grid"></div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <img id="modalImg" src="" alt=""/>
+      <div class="meta" id="modalMeta"></div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <button class="btn-view">View Project →</button>
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        id: 1,
+        title: "Digital World Platform",
+        desc: "A full-stack web platform exploring global digital connectivity. Built with React and Node.js, featuring real-time data visualization and interactive globe rendering.",
+        category: "webdev",
+        tag: "Web Dev",
+        img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80",
+        tools: ["React", "Node.js", "Three.js"]
+      },
+      {
+        id: 2,
+        title: "Dev Environment UI",
+        desc: "A sleek UI/UX design for a developer productivity dashboard. Focused on dark-mode aesthetics, clear hierarchy, and keyboard-first navigation patterns.",
+        category: "uxui",
+        tag: "UX/UI",
+        img: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=600&q=80",
+        tools: ["Figma", "Tailwind", "Framer"]
+      },
+      {
+        id: 3,
+        title: "Mobile App Concept",
+        desc: "An end-to-end UX prototype for a task management mobile app, designed with accessibility and micro-animation in mind.",
+        category: "uxui",
+        tag: "UX/UI",
+        img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80",
+        tools: ["Figma", "Protopie"]
+      },
+      {
+        id: 4,
+        title: "Portfolio Website",
+        desc: "A personal portfolio site built from scratch using vanilla HTML, CSS & JS — with scroll animations and a dynamic project filter system.",
+        category: "webdev",
+        tag: "Web Dev",
+        img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80",
+        tools: ["HTML", "CSS", "JavaScript"]
+      },
+      {
+        id: 5,
+        title: "Brand Identity System",
+        desc: "Full brand identity design for a tech startup, including logo system, typography guide, color palette, and component library.",
+        category: "other",
+        tag: "Other",
+        img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80",
+        tools: ["Illustrator", "Photoshop"]
+      },
+      {
+        id: 6,
+        title: "API Dashboard",
+        desc: "A developer-focused REST API monitoring dashboard with live metrics, endpoint testing, and authentication flow visualization.",
+        category: "webdev",
+        tag: "Web Dev",
+        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+        tools: ["Vue.js", "D3.js", "REST API"]
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+
+    function renderCards(filter) {
+      grid.innerHTML = '';
+      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img class="card-img" src="${p.img}" alt="${p.title}"/>
+          <div class="card-overlay">
+            <h3>${p.title}</h3>
+            <p>${p.desc.substring(0, 80)}…</p>
+            <span class="tag">${p.tag}</span>
+          </div>
+        `;
+        card.addEventListener('click', () => openModal(p));
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(p) {
+      document.getElementById('modalImg').src = p.img;
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalDesc').textContent = p.desc;
+      const meta = document.getElementById('modalMeta');
+      meta.innerHTML = p.tools.map(t => `<span>${t}</span>`).join('');
+      modal.classList.add('open');
+    }
+
+    modalClose.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCards(btn.dataset.filter);
+      });
+    });
+
+    renderCards('all');
+  </script>
+</body>
+</html>
