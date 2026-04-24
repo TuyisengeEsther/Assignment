@@ -34,6 +34,4 @@ Personal portfolio website for **Tuyisenge Esther**, Software Engineering Studen
 📍 Kigali, Rwanda  
 🔗 [GitHub](https://github.com/TuyisengeEsther) · [GitLab](https://gitlab.com/T-esther)
 
----
-
-*Designed and built by Tuyisenge Esther · 2025*
+Designed and built by Tuyisenge Esther · 2025
